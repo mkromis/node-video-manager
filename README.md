@@ -2,6 +2,17 @@
 
 - 📖 [Remix docs](https://remix.run/docs)
 
+## Creation Steps
+
+1. Read about target, for my situation it was `Qnap Container Station`
+    1. Network binding via bridge works, address moves with restarts.
+2. Create app with vite `pnpm create vite`
+3. Select `React` -> `Remix`
+4. [Dockerize pnpm](https://pnpm.io/docker)
+    1. change dist locations to build
+    2. `docker build -t video-manager .`
+    3. `
+
 ## Development
 
 Run the dev server:
