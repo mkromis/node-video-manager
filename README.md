@@ -15,6 +15,8 @@
     * Tailwind is already installed from `pnpm create vite`.
     * Add [DailyUI](https://daisyui.com/docs/install/) 
     * [DailyUI Playground](https://daisyui.com/tailwindplay/)
+    * [Generate Routes](https://github.com/sandulat/routes-gen)
+        * [Invalid Driver Issue](https://github.com/sandulat/routes-gen/issues/42)
 
 ## Development
 
