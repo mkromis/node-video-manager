@@ -1,4 +1,4 @@
-import { json, LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { ActionFunctionArgs, json, LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { withZod } from "@remix-validated-form/with-zod";
 import { ValidatedForm, validationError } from "remix-validated-form";
@@ -24,7 +24,7 @@ export const loader = () => {
     })
 }
 
-export const action = async ({request}: LoaderFunctionArgs) => {
+export const action = async ({request}: ActionFunctionArgs) => {
     const fieldValues = await validator.validate(request.formData)
     if (fieldValues.error) return validationError(fieldValues.error)
 
