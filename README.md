@@ -11,7 +11,6 @@
 4. [Dockerize pnpm](https://pnpm.io/docker)
     1. change dist locations to build
     2. `docker build -t video-manager .`
-    3. `
 
 ## Development
 
