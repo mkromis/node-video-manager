@@ -6,6 +6,7 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev",
+    "db:migrations": "drizzle-kit generate",
     "routes:gen": "routes-gen -d @routes-gen/remix",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",

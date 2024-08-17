@@ -12,11 +12,15 @@
     1. change dist locations to build
     2. `docker build -t video-manager .`
 5. [Add Tailwind and Drizzle](https://dev.to/franciscomendes10866/building-dynamic-web-applications-with-remixjs-drizzle-orm-and-tailwind-540k)
-    * Tailwind is already installed from `pnpm create vite`.
-    * Add [DailyUI](https://daisyui.com/docs/install/) 
-    * [DailyUI Playground](https://daisyui.com/tailwindplay/)
-    * [Generate Routes](https://github.com/sandulat/routes-gen)
+    1. Tailwind is already installed from `pnpm create vite`.
+    2. Add [DailyUI](https://daisyui.com/docs/install/) 
+        * [DailyUI Playground](https://daisyui.com/tailwindplay/)
+    3. [Generate Routes](https://github.com/sandulat/routes-gen)
         * [Invalid Driver Issue](https://github.com/sandulat/routes-gen/issues/42)
+        * Add empty `remix.config.cjs`
+    4. [Drizzle Sqlite Setup](https://orm.drizzle.team/docs/get-started-sqlite)
+        * The instructions on the tutorial page is no longer correct. You now need `drizzle.config.ts`
+        * [SqliteSetup](https://orm.drizzle.team/kit-docs/config-reference#migrationsprefix)
 
 ## Development
 
