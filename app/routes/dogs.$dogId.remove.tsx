@@ -24,12 +24,15 @@ export default function DogDetailsRemove() {
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Delete Database Entry</h3>
-                    <p className="modal-action">
+                    <p className="py-4">
+                        Are you sure you want to delete this database entry? This cantion is irreversible.
+                    </p>
+                    <div className="modal-action">
                         <Form method="POST">
                             <input type="hidden" name="_method" value="delete" />
                             <button className="btn">Yes</button>
                         </Form>
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
