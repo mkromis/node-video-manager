@@ -1,5 +1,5 @@
 {
-  "name": "videomanager",
+  "name": "node-video-manager",
   "private": true,
   "sideEffects": false,
   "type": "module",
