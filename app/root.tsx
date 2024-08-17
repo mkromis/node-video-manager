@@ -9,6 +9,7 @@ import {
 //import "~/tailwind.css"; // implicit import
 
 import stylesheet from "~/tailwind.css?url" // explicit import
+import { Navbar } from "./app/components/Navbar";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet}
@@ -24,6 +25,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <Navbar />
         {children}
         <ScrollRestoration />
         <Scripts />
