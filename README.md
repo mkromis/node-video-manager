@@ -11,13 +11,17 @@
 4. [Dockerize pnpm](https://pnpm.io/docker)
     1. change dist locations to build
     2. `docker build -t video-manager .`
+5. [Add Tailwind and Drizzle](https://dev.to/franciscomendes10866/building-dynamic-web-applications-with-remixjs-drizzle-orm-and-tailwind-540k)
+    * Tailwind is already installed from `pnpm create vite`.
+    * Add [DailyUI](https://daisyui.com/docs/install/) 
+    * [DailyUI Playground](https://daisyui.com/tailwindplay/)
 
 ## Development
 
 Run the dev server:
 
-```shellscript
-npm run dev
+```sh
+pnpm dev
 ```
 
 ## Deployment
@@ -25,13 +29,13 @@ npm run dev
 First, build your app for production:
 
 ```sh
-npm run build
+pnpm run build
 ```
 
 Then run the app in production mode:
 
 ```sh
-npm start
+pnpm run start
 ```
 
 Now you'll need to pick a host to deploy it to.
