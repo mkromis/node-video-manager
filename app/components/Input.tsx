@@ -1,5 +1,4 @@
 import type { FC, InputHTMLAttributes } from "react";
-import { useField } from "remix-validated-form"
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string

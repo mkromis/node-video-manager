@@ -1,19 +1,16 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { withZod } from "@remix-validated-form/with-zod";
-import { ValidatedForm, validationError } from "remix-validated-form";
+import { Form, useLoaderData } from "@remix-run/react";
 import { route } from "routes-gen";
 import { z } from "zod";
-import { Input } from "~/components/Input";
 import { db } from "~/db/config.server";
 import { dogs } from "~/db/schema.server";
 
-const validator = withZod(
-    z.object({
-        name: z.string().min(1).max(34),
-        breed: z.string().min(1).max(34),
-    })
-)
+// const validator = withZod(
+//     z.object({
+//         name: z.string().min(1).max(34),
+//         breed: z.string().min(1).max(34),
+//     })
+// )
 
 export const loader = () => {
     return json({
@@ -25,12 +22,30 @@ export const loader = () => {
 }
 
 export const action = async ({params, request}: ActionFunctionArgs) => {
-    console.log(params)
-    const fieldValues = await validator.validate(request.formData)
-    if (fieldValues.error) return validationError(fieldValues.error)
+    const formData = await request.formData()
+    const name = String(formData.get("name"))
+    const breed = String(formData.get("breed"))
 
+    // Track for parsing errors
+    const errors = {}
+
+    // Track errors
+    if (name.length == 0 || name.length > 34) {
+        errors.name = "Invalid dog name";
+    }
+
+    if (breed.length == 0 || breed.length > 34) {
+        errors.breed = "Invalid dog name";
+    }
+
+    if (Object.keys(errors).length > 0) {
+        return json({errors})
+    }
+    
     try {
-        db.insert(dogs).values(fieldValues.data).run();
+        db.insert(dogs).values({
+            name, breed
+        }).run();
     } catch (error) {
         console.log(error)
     }
@@ -39,6 +54,7 @@ export const action = async ({params, request}: ActionFunctionArgs) => {
 
 export default function DogInsertion() {
     const {defaultValues} = useLoaderData<typeof loader>()
+    // const form = useForm({validator});
 
     return (
         <div>
@@ -47,19 +63,26 @@ export default function DogInsertion() {
                 <p className="text-grey-600">Listen, every doggo is a good boy/girl.</p>
             </div>
 
-            <ValidatedForm
+            <Form 
                 className="space-y-6"
-                method="post"
-                validator={validator}
-                defaultValues={defaultValues}
-            >
-                <Input name="name" label="Name" placeholder="Your doggo's name..." />
-                <Input name="breed" label="Breed" placeholder="Your doggo's breed..." />
+                method="post">
 
-                <button className="btn btn-accent" type="submit">
-                    Submit
-                </button>
-            </ValidatedForm>
+                <span className="flex flex-col">
+                    <label className="mb-3">Name</label>
+                    <input name="name" className="input input-bordered, w-full, max-w-xs" />
+                    {/* {error && <span className="label-text-alt mt-3">{error}</span>} */}
+                </span>
+                <span className="flex flex-col">
+                    <label className="mb-3">Breed</label>
+                    <input name="breed" className="input input-bordered, w-full, max-w-xs" />
+                    {/* {error && <span className="label-text-alt mt-3">{error}</span>} */}
+                </span>
+
+                {/* <Input name="name" label="Name" placeholder="Your doggo's name..." />
+                <Input name="breed" label="Breed" placeholder="Your doggo's breed..." /> */}
+
+                <button className="btn btn-accent" type="submit">Submit</button>
+            </Form>
         </div>
     )
 }
