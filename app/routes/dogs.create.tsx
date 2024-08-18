@@ -4,7 +4,7 @@ import { withZod } from "@remix-validated-form/with-zod";
 import { ValidatedForm, validationError } from "remix-validated-form";
 import { route } from "routes-gen";
 import { z } from "zod";
-import { Input } from "~/app/components/Input";
+import { Input } from "~/components/Input";
 import { db } from "~/db/config.server";
 import { dogs } from "~/db/schema.server";
 
@@ -18,13 +18,14 @@ const validator = withZod(
 export const loader = () => {
     return json({
         defaultValues: {
-            name: "",
-            breed: ""
+            name: "qwerty",
+            breed: "kitsune"
         }
     })
 }
 
-export const action = async ({request}: ActionFunctionArgs) => {
+export const action = async ({params, request}: ActionFunctionArgs) => {
+    console.log(params)
     const fieldValues = await validator.validate(request.formData)
     if (fieldValues.error) return validationError(fieldValues.error)
 
@@ -48,7 +49,7 @@ export default function DogInsertion() {
 
             <ValidatedForm
                 className="space-y-6"
-                method="POST"
+                method="post"
                 validator={validator}
                 defaultValues={defaultValues}
             >

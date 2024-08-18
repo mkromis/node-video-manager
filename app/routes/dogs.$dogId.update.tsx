@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 import { ValidatedForm, validationError } from "remix-validated-form";
 import { route, RouteParams } from "routes-gen";
 import { z } from "zod";
-import { Input } from "~/app/components/Input";
+import { Input } from "~/components/Input";
 import { db } from "~/db/config.server";
 import { dogs } from "~/db/schema.server";
 

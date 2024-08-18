@@ -8,7 +8,7 @@ import {
 } from "@remix-run/react";
 
 import stylesheet from "~/tailwind.css?url" // explicit import
-import { Navbar } from "./app/components/Navbar";
+import { Navbar } from "./components/Navbar";
 
 export const meta: MetaFunction = () => [
   { charSet: "utf-8"},
