@@ -1,25 +1,9 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs, redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { route } from "routes-gen";
 import { z } from "zod";
 import { db } from "~/db/config.server";
 import { dogs } from "~/db/schema.server";
-
-// const validator = withZod(
-//     z.object({
-//         name: z.string().min(1).max(34),
-//         breed: z.string().min(1).max(34),
-//     })
-// )
-
-export const loader = () => {
-    return json({
-        defaultValues: {
-            name: "qwerty",
-            breed: "kitsune"
-        }
-    })
-}
 
 export const action = async ({params, request}: ActionFunctionArgs) => {
     const formData = await request.formData()
@@ -35,7 +19,7 @@ export const action = async ({params, request}: ActionFunctionArgs) => {
     }
 
     if (breed.length == 0 || breed.length > 34) {
-        errors.breed = "Invalid dog name";
+        errors.breed = "Invalid breed name";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -53,8 +37,7 @@ export const action = async ({params, request}: ActionFunctionArgs) => {
 }
 
 export default function DogInsertion() {
-    const {defaultValues} = useLoaderData<typeof loader>()
-    // const form = useForm({validator});
+    const actionData = useActionData<typeof action>()
 
     return (
         <div>
@@ -69,17 +52,21 @@ export default function DogInsertion() {
 
                 <span className="flex flex-col">
                     <label className="mb-3">Name</label>
-                    <input name="name" className="input input-bordered, w-full, max-w-xs" />
-                    {/* {error && <span className="label-text-alt mt-3">{error}</span>} */}
+                    <input name="name" className="input input-bordered, w-full, max-w-xs" placeholder="Your doggo's name..." />
+                    {/* Error messages if needed */}
+                    {actionData?.errors?.name
+                        ? (<span className="label-text-alt mt-3">{actionData?.errors.name}</span>) 
+                        : null}
                 </span>
                 <span className="flex flex-col">
                     <label className="mb-3">Breed</label>
-                    <input name="breed" className="input input-bordered, w-full, max-w-xs" />
-                    {/* {error && <span className="label-text-alt mt-3">{error}</span>} */}
+                    <input name="breed" className="input input-bordered, w-full, max-w-xs" placeholder="Your doggo's breed..." />
+                    {/* Error message */}
+                    {actionData?.errors?.breed 
+                        ? (<span className="label-text-alt mt-3">{actionData.errors.breed}</span>)
+                        : null
+                    }
                 </span>
-
-                {/* <Input name="name" label="Name" placeholder="Your doggo's name..." />
-                <Input name="breed" label="Breed" placeholder="Your doggo's breed..." /> */}
 
                 <button className="btn btn-accent" type="submit">Submit</button>
             </Form>

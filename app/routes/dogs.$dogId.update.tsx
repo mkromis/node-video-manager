@@ -27,8 +27,8 @@ export const loader = ({ params }: LoaderFunctionArgs) => {
 }
 
 export const action = async({request, params}:ActionFunctionArgs) => {
-    const fieldValues = await validator.validate(await request.formData())
-    const {dogId} = params as RouteParams["/dogs/:dogId/update"]
+    // const fieldValues = await validator.validate(await request.formData())
+    // const {dogId} = params as RouteParams["/dogs/:dogId/update"]
 
     // if (fieldValues.error) {
     //     return validationError(fieldValues.error);

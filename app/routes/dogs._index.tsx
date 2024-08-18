@@ -25,7 +25,7 @@ export default function DogList() {
                     {data?.map((item) => (
                         <tr key={item.id}>
                         <th>
-                            <Link to={route("/dogs/:dogId/details", {
+                            <Link to={route("/dogs/:dogId", {
                                 dogId: item.id.toString(),
                             })}><kbd className="kbd">{item.id}</kbd></Link>
                         </th>
