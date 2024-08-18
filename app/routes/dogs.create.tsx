@@ -28,7 +28,11 @@ export const action = async ({request}: ActionFunctionArgs) => {
     const fieldValues = await validator.validate(request.formData)
     if (fieldValues.error) return validationError(fieldValues.error)
 
-    db.insert(dogs).values(fieldValues.data).run();
+    try {
+        db.insert(dogs).values(fieldValues.data).run();
+    } catch (error) {
+        console.log(error)
+    }
     return redirect(route("/dogs"))
 }
 
@@ -47,14 +51,14 @@ export default function DogInsertion() {
                 method="POST"
                 validator={validator}
                 defaultValues={defaultValues}
-                >
-                    <Input name="name" label="Name" placeholder="Your doggo's name..." />
-                    <Input name="breed" label="Breed" placeholder="Your doggo's breed..." />
+            >
+                <Input name="name" label="Name" placeholder="Your doggo's name..." />
+                <Input name="breed" label="Breed" placeholder="Your doggo's breed..." />
 
-                    <button className="btn btn-accent" type="submit">
-                        Submit
-                    </button>
-                </ValidatedForm>
+                <button className="btn btn-accent" type="submit">
+                    Submit
+                </button>
+            </ValidatedForm>
         </div>
     )
 }
