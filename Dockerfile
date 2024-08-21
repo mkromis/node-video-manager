@@ -43,11 +43,16 @@ RUN pnpm run build
 # Finally, build the production image with minimal footprint
 FROM base
 
+# You may need to run volumes from command instead from UI
+RUN mkdir /data
 WORKDIR /remixapp
 
 ENV NODE_ENV production
 ENV SESSION_SECRET ThisIsAS4cr3tKey
-ENV DB_PATH /remixapp/data
+ENV DB_PATH /data
+ENV MEDIA /media
+ENV PORT 80
+
 COPY --from=production-deps /remixapp/node_modules /remixapp/node_modules
 COPY --from=build /remixapp/build /remixapp/build
 COPY --from=build /remixapp/package.json /remixapp/package.json
@@ -55,6 +60,6 @@ COPY --from=build /remixapp/package.json /remixapp/package.json
 ADD server.js ./
 ADD migrations/ migrations/
 
-RUN mkdir /remixapp/data
+#RUN mkdir /remixapp/data
 
 CMD ["npm", "start"]

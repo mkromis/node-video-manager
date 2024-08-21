@@ -78,3 +78,10 @@ Make sure to deploy the output of `npm run build` and the server
 - `build/client`
 
 Take a look at the provided Dockerfile for further details on how to configure a production environment.
+
+### Docker run
+
+Sample docker with named containers
+```sh
+docker run -d --name NodeVideoManager --mount source=VideoMedia,target=/media --mount source=VideoData,target=/data nodevideomanager
+```
