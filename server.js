@@ -29,7 +29,7 @@ const viteDevServer =
 				vite.createServer({
 					server: { middlewareMode: true },
 				}),
-		  );
+			);
 
 // Setup and migrate the database
 const dbDir = process.env.DB_PATH

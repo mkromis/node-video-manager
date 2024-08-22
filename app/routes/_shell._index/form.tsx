@@ -1,4 +1,4 @@
-import { type SubmissionResult } from "@conform-to/react";
+import type { SubmissionResult } from "@conform-to/react";
 
 import { loginFormSchema } from "@/lib/auth";
 import { useForm } from "@/lib/forms";

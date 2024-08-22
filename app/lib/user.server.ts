@@ -1,4 +1,4 @@
-import { AppLoadContext } from "@remix-run/node";
+import type { AppLoadContext } from "@remix-run/node";
 import bcrypt from "bcryptjs";
 import { SqliteError } from "better-sqlite3";
 import { and, eq } from "drizzle-orm";
