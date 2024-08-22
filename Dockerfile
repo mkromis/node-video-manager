@@ -51,7 +51,7 @@ ENV NODE_ENV production
 ENV SESSION_SECRET ThisIsAS4cr3tKey
 ENV DB_PATH /data
 ENV MEDIA /media
-ENV PORT 80
+ENV PORT 8080
 
 COPY --from=production-deps /remixapp/node_modules /remixapp/node_modules
 COPY --from=build /remixapp/build /remixapp/build
