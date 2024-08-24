@@ -13,7 +13,8 @@ export default defineConfig(({ isSsrBuild }) => ({
 		exclude: ["bcryptjs", "better-sqlite3", "drizzle-orm", "fsevents"],
 	},
 	plugins: [
-		envOnly(),
+		// TODO: Fix EnvOnly()
+		//envOnly(),
 		tsconfigPaths(),
 		remix({
 			future: {

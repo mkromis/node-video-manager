@@ -10,14 +10,16 @@ import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import express from "express";
 import morgan from "morgan";
 
+// Check Environment
 const SESSION_SECRET = process.env.SESSION_SECRET;
-
 if (!SESSION_SECRET) {
 	throw new Error("The SESSION_SECRET environment variable is required");
 }
-
-if (process.env.NODE_ENV === "production" && !process.env.DB_PATH) {
-	throw new Error("The DB_PATH environment variable is required in production");
+if (!process.env.DB_PATH) {
+	throw new Error("The DB_PATH environment variable is required");
+}
+if (!process.env.MEDIA) {
+	throw new Error("The MEDIA  environment variable is required");
 }
 
 installGlobals();
@@ -31,15 +33,19 @@ const viteDevServer =
 				}),
 			);
 
+// Setup the media folder
+const mediaDir = path.resolve(process.env.MEDIA)
+fs.mkdirSync(mediaDir, {recursive: true})
+
 // Setup and migrate the database
-const dbDir = process.env.DB_PATH
-	? path.resolve(process.env.DB_PATH)
-	: path.resolve("./.database");
+const dbDir = path.resolve(process.env.DB_PATH)
 fs.mkdirSync(dbDir, { recursive: true });
 
+// Setup the database load path
 const sqlite = new Database(path.resolve(dbDir, "database.db"));
 fs.mkdirSync(dbDir, { recursive: true });
 
+// Migrate if necessary
 migrate(drizzle(sqlite), {
 	migrationsFolder: "./migrations",
 });
@@ -58,10 +64,12 @@ const remixHandler = createRequestHandler({
 		return {
 			DB,
 			SESSION_SECRET,
+			mediaDir,
 		};
 	},
 });
 
+// Setup Express engine
 const app = express();
 
 app.use(compression());
