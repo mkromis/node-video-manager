@@ -10,7 +10,7 @@ export function getCookieSessionStorage(sessionSecret: string) {
 			secrets: [sessionSecret],
 			//TODO: enable if your nas has a signed cert, else cookies wont save
 			// secure: import.meta.env.PROD,
-			secure: false, 
+			secure: false,
 		},
 	});
 }

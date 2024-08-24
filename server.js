@@ -34,11 +34,11 @@ const viteDevServer =
 			);
 
 // Setup the media folder
-const mediaDir = path.resolve(process.env.MEDIA)
-fs.mkdirSync(mediaDir, {recursive: true})
+const mediaDir = path.resolve(process.env.MEDIA);
+fs.mkdirSync(mediaDir, { recursive: true });
 
 // Setup and migrate the database
-const dbDir = path.resolve(process.env.DB_PATH)
+const dbDir = path.resolve(process.env.DB_PATH);
 fs.mkdirSync(dbDir, { recursive: true });
 
 // Setup the database load path

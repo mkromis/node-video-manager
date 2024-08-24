@@ -1,7 +1,7 @@
 export type Theme = "light" | "dark" | "system";
 
 // Change key name in case of conflict with nas
-const storageThemeName = "nvm_theme"
+const storageThemeName = "nvm_theme";
 
 /**
  * This component is used to set the theme based on the value at hydration time.
@@ -54,7 +54,9 @@ export function ThemeSwitcherScript() {
 
 export function getTheme() {
 	return validateTheme(
-		typeof document === "undefined" ? "system" : localStorage.getItem(storageThemeName),
+		typeof document === "undefined"
+			? "system"
+			: localStorage.getItem(storageThemeName),
 	);
 }
 
