@@ -41,7 +41,7 @@ export function ThemeSwitcherScript() {
 			dangerouslySetInnerHTML={{
 				__html: `
           (function() {
-            var theme = localStorage.getItem("theme");
+            var theme = localStorage.getItem("nvm_theme");
             if (theme) {
               document.documentElement.setAttribute("data-theme", theme);
             }
@@ -83,7 +83,7 @@ export function setTheme(theme: Theme | string) {
 		localStorage.setItem(storageThemeName, themeToSet);
 		document.documentElement.setAttribute("data-theme", themeToSet);
 	} else {
-		localStorage.removeItem("theme");
+		localStorage.removeItem(storageThemeName);
 		document.documentElement.removeAttribute("data-theme");
 	}
 }
