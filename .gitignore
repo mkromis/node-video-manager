@@ -5,3 +5,5 @@
 *.log
 build
 node_modules
+data
+media

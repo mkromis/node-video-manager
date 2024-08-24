@@ -11,10 +11,5 @@
 		"rules": {
 			"recommended": true
 		}
-	},
-	"json": {
-		"formatter": {
-			"enabled": false
-		}
 	}
 }

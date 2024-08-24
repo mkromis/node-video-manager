@@ -1,5 +1,8 @@
 export type Theme = "light" | "dark" | "system";
 
+// Change key name in case of conflict with nas
+const storageThemeName = "nvm_theme";
+
 /**
  * This component is used to set the theme based on the value at hydration time.
  * If no value is found, it will default to the user's system preference and
@@ -38,7 +41,7 @@ export function ThemeSwitcherScript() {
 			dangerouslySetInnerHTML={{
 				__html: `
           (function() {
-            var theme = localStorage.getItem("theme");
+            var theme = localStorage.getItem("nvm_theme");
             if (theme) {
               document.documentElement.setAttribute("data-theme", theme);
             }
@@ -51,7 +54,9 @@ export function ThemeSwitcherScript() {
 
 export function getTheme() {
 	return validateTheme(
-		typeof document === "undefined" ? "system" : localStorage.getItem("theme"),
+		typeof document === "undefined"
+			? "system"
+			: localStorage.getItem(storageThemeName),
 	);
 }
 
@@ -60,14 +65,14 @@ export function getTheme() {
  * value in localStorage.
  */
 export function toggleTheme() {
-	let currentTheme = validateTheme(localStorage.getItem("theme"));
+	let currentTheme = validateTheme(localStorage.getItem(storageThemeName));
 	if (currentTheme === "system") {
 		currentTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
 			? "dark"
 			: "light";
 	}
 	const newTheme = currentTheme === "light" ? "dark" : "light";
-	localStorage.setItem("theme", newTheme);
+	localStorage.setItem(storageThemeName, newTheme);
 	document.documentElement.setAttribute("data-theme", newTheme);
 }
 
@@ -77,10 +82,10 @@ export function setTheme(theme: Theme | string) {
 		themeToSet = null;
 	}
 	if (themeToSet) {
-		localStorage.setItem("theme", themeToSet);
+		localStorage.setItem(storageThemeName, themeToSet);
 		document.documentElement.setAttribute("data-theme", themeToSet);
 	} else {
-		localStorage.removeItem("theme");
+		localStorage.removeItem(storageThemeName);
 		document.documentElement.removeAttribute("data-theme");
 	}
 }

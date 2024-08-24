@@ -62,4 +62,4 @@ ADD migrations/ migrations/
 
 #RUN mkdir /remixapp/data
 
-CMD ["npm", "start"]
+CMD ["pnpm", "run", "start"]
