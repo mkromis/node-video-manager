@@ -9,6 +9,7 @@ import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import express from "express";
 import morgan from "morgan";
+import serveStatic from 'serve-static'
 
 // Check Environment
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -91,6 +92,9 @@ if (viteDevServer) {
 // Everything else (like favicon.ico) is cached for an hour. You may want to be
 // more aggressive with this caching.
 app.use(express.static("build/client", { maxAge: "1h" }));
+
+// redirect media folder
+app.use('/media', serveStatic(mediaDir));
 
 app.use(morgan("tiny"));
 
