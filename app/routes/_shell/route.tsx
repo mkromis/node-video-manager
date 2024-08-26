@@ -26,6 +26,8 @@ function Layout({ children }: { children: React.ReactNode }) {
 	);
 }
 
+// This is the outer route, holds layout and uses all other routes.
+// This is simular to root node
 export default function Shell() {
 	return (
 		<Layout>

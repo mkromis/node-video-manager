@@ -7,6 +7,7 @@ import {
 	isRouteErrorResponse,
 	useRouteError,
 } from "@remix-run/react";
+import type { LinksFunction } from "@remix-run/node";
 
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
 import {
@@ -14,7 +15,11 @@ import {
 	ThemeSwitcherScript,
 } from "@/components/theme-switcher";
 
-import "./globals.css";
+import globalStyle from "./globals.css?url";
+
+export const links: LinksFunction = () => [
+	{ rel: "stylesheet",  href: globalStyle}
+]
 
 function App({ children }: { children: React.ReactNode }) {
 	return (

@@ -1,5 +1,5 @@
-import { ExitIcon, LaptopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Form, Link } from "@remix-run/react";
+import { ExitIcon, HomeIcon, LaptopIcon, LockClosedIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { Form, Link, redirect } from "@remix-run/react";
 import * as React from "react";
 import { useHydrated } from "remix-utils/use-hydrated";
 
@@ -35,7 +35,7 @@ export function Header({
 				<div className="flex items-center space-x-4">
 					<Link className="flex items-center space-x-2" to="/">
 						{/* <HomeIcon className="h-6 w-6" /> */}
-						<span className="text-lg font-bold">NVM</span>
+						<span className="text-lg font-bold">Nas Video</span>
 					</Link>
 				</div>
 				<div className="flex items-center space-x-4">
@@ -92,6 +92,11 @@ export function Header({
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
+					{!isAuthenticated && (
+						<Link to="/login">
+							<LockClosedIcon />
+						</Link>
+					)}
 					{isAuthenticated && (
 						<Button
 							form="logout-form"
