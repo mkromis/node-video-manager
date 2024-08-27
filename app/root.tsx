@@ -16,9 +16,11 @@ import {
 } from "@/components/theme-switcher";
 
 import globalStyle from "./globals.css?url";
+import playerStyle from "node_modules/video-react/dist/video-react.css?url"; // import css
 
 export const links: LinksFunction = () => [
-	{ rel: "stylesheet",  href: globalStyle}
+	{ rel: "stylesheet", href: globalStyle },
+	{ rel: "stylesheet", href: playerStyle }
 ]
 
 function App({ children }: { children: React.ReactNode }) {
