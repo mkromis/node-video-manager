@@ -1,84 +1,44 @@
-# Welcome to Remix + Vite + shadcn/ui!
+<h1 align="center">
+  🛍️ Remix SaaS
+</h1>
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+<div align="center">
+  <p>
+  A Lightweight, Feature-Rich, and Production-Ready Remix Stack for your next SaaS application.
+  </p>
+</div>
+
+<div align="center">
+  <p>
+    <a href="https://remix-saas.fly.dev">Live Demo</a>
+    ·
+    <a href="https://github.com/dev-xo/remix-saas/tree/main/docs">Documentation</a>
+    ·
+    <a href="https://twitter.com/DanielKanem">Twitter</a>
+  </p>
+</div>
+
+```sh
+npx create-remix-saas@latest
+```
+
+## [Live Demo](https://remix-saas.fly.dev)
+
+[![Remix SaaS](https://raw.githubusercontent.com/dev-xo/dev-xo/main/remix-saas/intro.png)](https://remix-saas.fly.dev)
+
+We've created a simple demo that displays all template-provided features. Psst! Give the site a few seconds to load! _(It's running on a free tier!)_
+
+> [!NOTE]
+> Remix SaaS is an Open Source Template that shares common bits of code with: [Indie Stack](https://github.com/remix-run/indie-stack), [Epic Stack](https://github.com/epicweb-dev/epic-stack), [Supa Stripe Stack](https://github.com/rphlmr/supa-stripe-stack), and some other amazing Open Source Remix resources. Check them out, please!
 
 ## Getting Started
 
-Node Server:
+Please, read the [Getting Started Documentation](https://github.com/dev-xo/remix-saas/tree/main/docs#remix-saas-documentation) to successfully initialize your **Remix SaaS** Template.
 
-```sh
-npx create-remix@latest --template jacob-ebey/remix-shadcn
-```
+## Support
 
-Cloudflare Pages:
+If you found **Remix SaaS** helpful, consider supporting it with a ⭐ [Star](https://github.com/dev-xo/remix-saas). It helps the repository grow and provides the required motivation to continue maintaining the project. Thank you!
 
-```shellscript
-npx create-remix@latest --template https://github.com/jacob-ebey/remix-shadcn/tree/cloudflare
-```
+## Acknowledgments
 
-Or for a more flushed out template with a login flow and a SQLite database backed by Drizzle ORM:
-
-Node Server:
-
-```shellscript
-npx create-remix@latest --template https://github.com/jacob-ebey/remix-shadcn/tree/drizzle
-```
-
-Cloudflare Pages:
-
-```shellscript
-npx create-remix@latest --template https://github.com/jacob-ebey/remix-shadcn/tree/drizzle-cloudflare
-```
-
-## Built in theme switcher
-
-![image](https://github.com/jacob-ebey/remix-shadcn/assets/12063586/c6ed812c-764f-46b7-af30-26284f55535c)
-
-![image](https://github.com/jacob-ebey/remix-shadcn/assets/12063586/4e378230-3b4b-4b78-8af4-096b30aacf79)
-
-## Development
-
-Run the Vite dev server:
-
-```sh
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Setup your environment:
-
-```sh
-DB_PATH='/data' # a persistent volume
-NODE_ENV='production'
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build` and the server
-
-- `server.js`
-- `build/server`
-- `build/client`
-
-Take a look at the provided Dockerfile for further details on how to configure a production environment.
-
-### Docker run
-The current method of docker execution is to copy all of the source to docker image.
-Sample docker with named containers, see `docker-run.sh` and `docker-rm.sh`
+Special thanks to [@mw10013](https://github.com/mw10013) who has been part of the Remix SaaS development.
