@@ -1,3 +1,4 @@
+import type { LinksFunction } from "@remix-run/node";
 import {
 	Links,
 	Meta,
@@ -9,13 +10,18 @@ import {
 } from "@remix-run/react";
 
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
-import { Header } from "@/components/header";
 import {
 	ThemeSwitcherSafeHTML,
 	ThemeSwitcherScript,
 } from "@/components/theme-switcher";
 
-import "./globals.css";
+import playerStyle from "node_modules/video-react/dist/video-react.css?url"; // import css
+import globalStyle from "./globals.css?url";
+
+export const links: LinksFunction = () => [
+	{ rel: "stylesheet", href: globalStyle },
+	{ rel: "stylesheet", href: playerStyle },
+];
 
 function App({ children }: { children: React.ReactNode }) {
 	return (
