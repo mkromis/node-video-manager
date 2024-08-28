@@ -6,6 +6,6 @@ declare module "@remix-run/node" {
 	export interface AppLoadContext {
 		DB: DB;
 		SESSION_SECRET: string;
-		MEDIA_DIR:string;
+		MEDIA_DIR: string;
 	}
 }

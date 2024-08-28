@@ -1,4 +1,11 @@
-import { ExitIcon, HomeIcon, LaptopIcon, LockClosedIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import {
+	ExitIcon,
+	HomeIcon,
+	LaptopIcon,
+	LockClosedIcon,
+	MoonIcon,
+	SunIcon,
+} from "@radix-ui/react-icons";
 import { Form, Link, redirect } from "@remix-run/react";
 import * as React from "react";
 import { useHydrated } from "remix-utils/use-hydrated";
