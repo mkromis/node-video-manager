@@ -2,6 +2,7 @@ import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Plus, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { BigPlayButton, Player } from "video-react";
 import { requireUser } from '#app/modules/auth/auth.server'
 import { prisma } from '#app/utils/db.server'
 import { cn } from '#app/utils/misc.js'
@@ -49,6 +50,9 @@ export default function DashboardIndex() {
                   <p className="text-center text-base font-normal text-primary/60">
                     {t('description')}
                   </p>
+                  <Player playsInline src="/media/test.mp4" >
+				            <BigPlayButton position="center" />
+			            </Player>
                   <span className="hidden select-none items-center rounded-full bg-green-500/5 px-3 py-1 text-xs font-medium tracking-tight text-green-700 ring-1 ring-inset ring-green-600/20 backdrop-blur-md dark:bg-green-900/40 dark:text-green-100 md:flex">
                     TIP: Try changing the language!
                   </span>
