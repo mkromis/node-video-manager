@@ -19,7 +19,10 @@
 </div>
 
 ```sh
-npx create-remix-saas@latest
+pnpm dlx create-remix-saas@latest
+pnpm exec prisma generate
+pnpm exec prisma db push
+pnpm exec prisma db seed
 ```
 
 ## [Live Demo](https://remix-saas.fly.dev)
