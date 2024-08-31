@@ -7,7 +7,6 @@ import type { Interval, Plan } from '#app/modules/stripe/plans'
 import { useState } from 'react'
 import { Form, useLoaderData } from '@remix-run/react'
 import { json, redirect } from '@remix-run/node'
-import { requireSessionUser } from '#app/modules/auth/auth.server'
 import { PLANS, PRICING_PLANS, INTERVALS, CURRENCIES } from '#app/modules/stripe/plans'
 import {
   createSubscriptionCheckout,
@@ -19,6 +18,7 @@ import { INTENTS } from '#app/utils/constants/misc'
 import { ROUTE_PATH as LOGIN_PATH } from '#app/routes/auth+/login'
 import { Switch } from '#app/components/ui/switch'
 import { Button } from '#app/components/ui/button'
+import { requireSessionUser } from '#app/services/session.server.js'
 
 export const ROUTE_PATH = '/dashboard/settings/billing' as const
 

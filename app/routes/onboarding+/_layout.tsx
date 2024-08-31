@@ -1,11 +1,11 @@
 import type { LoaderFunctionArgs } from '@remix-run/node'
 import { Outlet } from '@remix-run/react'
 import { json, redirect } from '@remix-run/node'
-import { requireUser } from '#app/modules/auth/auth.server'
 import { getDomainPathname } from '#app/utils/misc.server'
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
 import { ROUTE_PATH as ONBOARDING_USERNAME_PATH } from '#app/routes/onboarding+/username'
 import { Logo } from '#app/components/logo'
+import { requireUser } from '#app/services/session.server.js'
 
 export const ROUTE_PATH = '/onboarding' as const
 

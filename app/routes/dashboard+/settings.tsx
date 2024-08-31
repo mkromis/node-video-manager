@@ -2,10 +2,10 @@ import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node'
 import { Link, Outlet, useLocation } from '@remix-run/react'
 import { json } from '@remix-run/node'
 import { z } from 'zod'
-import { requireUser } from '#app/modules/auth/auth.server'
 import { cn } from '#app/utils/misc'
 import { ROUTE_PATH as BILLING_PATH } from '#app/routes/dashboard+/settings.billing'
 import { buttonVariants } from '#app/components/ui/button'
+import { requireUser } from '#app/services/session.server.js'
 
 export const ROUTE_PATH = '/dashboard/settings' as const
 

@@ -1,12 +1,12 @@
 import type { LoaderFunctionArgs } from '@remix-run/node'
 import { Link, Outlet } from '@remix-run/react'
 import { json, redirect } from '@remix-run/node'
-import { authenticator } from '#app/modules/auth/auth.server'
 import { getDomainPathname } from '#app/utils/misc.server'
 import { ROUTE_PATH as HOME_PATH } from '#app/routes/_home+/_layout'
 import { ROUTE_PATH as LOGIN_PATH } from '#app/routes/auth+/login'
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
 import { Logo } from '#app/components/logo'
+import { authenticator } from '#app/services/auth.server.js'
 
 export const ROUTE_PATH = '/auth' as const
 

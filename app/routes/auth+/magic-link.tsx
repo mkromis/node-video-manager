@@ -1,8 +1,8 @@
 import type { LoaderFunctionArgs } from '@remix-run/node'
-import { authenticator } from '#app/modules/auth/auth.server'
 
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
 import { ROUTE_PATH as LOGIN_PATH } from '#app/routes/auth+/login'
+import { authenticator } from '#app/services/auth.server.js'
 
 export const ROUTE_PATH = '/auth/magic-link' as const
 

@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs } from '@remix-run/router'
-import { requireUser } from '#app/modules/auth/auth.server'
 import { prisma } from '#app/utils/db.server.js'
+import { requireUser } from '#app/services/session.server.js'
 
 export const ROUTE_PATH = '/resources/reset-image' as const
 

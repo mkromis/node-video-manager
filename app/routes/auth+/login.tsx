@@ -13,8 +13,7 @@ import { z } from 'zod'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { Loader2 } from 'lucide-react'
-import { authenticator } from '#app/modules/auth/auth.server'
-import { getSession, commitSession } from '#app/modules/auth/auth-session.server'
+import { getSession, commitSession } from '~/services/session.server'
 import { validateCSRF } from '#app/utils/csrf.server'
 import { checkHoneypot } from '#app/utils/honeypot.server'
 import { useIsPending } from '#app/utils/misc'
@@ -23,6 +22,7 @@ import { Input } from '#app/components/ui/input'
 import { Button } from '#app/components/ui/button'
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
 import { ROUTE_PATH as AUTH_VERIFY_PATH } from '#app/routes/auth+/verify'
+import { authenticator } from '#app/services/auth.server.js'
 
 export const ROUTE_PATH = '/auth/login' as const
 
@@ -59,7 +59,7 @@ export async function action({ request }: ActionFunctionArgs) {
   await validateCSRF(formData, clonedRequest.headers)
   checkHoneypot(formData)
 
-  await authenticator.authenticate('TOTP', request, {
+  await authenticator.authenticate('totp', request, {
     successRedirect: AUTH_VERIFY_PATH,
     failureRedirect: pathname,
   })

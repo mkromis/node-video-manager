@@ -1,9 +1,9 @@
 import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { BigPlayButton, Player } from "video-react";
-import { requireUser } from '#app/modules/auth/auth.server'
 import { prisma } from '#app/utils/db.server'
 import { siteConfig } from '#app/utils/constants/brand'
+import { requireUser } from '#app/services/session.server.js';
 
 export const meta: MetaFunction = () => {
   return [{ title: `${siteConfig.siteTitle} - Dashboard` }]

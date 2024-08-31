@@ -2,7 +2,6 @@ import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 import { json } from '@remix-run/node'
 import { Star } from 'lucide-react'
-import { authenticator } from '#app/modules/auth/auth.server'
 import { cn } from '#app/utils/misc'
 import { useTheme } from '#app/utils/hooks/use-theme.js'
 import { siteConfig } from '#app/utils/constants/brand'
@@ -11,6 +10,7 @@ import { Button, buttonVariants } from '#app/components/ui/button'
 import { ThemeSwitcherHome } from '#app/components/misc/theme-switcher'
 import { Logo } from '#app/components/logo'
 import ShadowPNG from '/images/shadow.png?url'
+import { authenticator } from '#app/services/auth.server.js'
 
 export const meta: MetaFunction = () => {
   return [{ title: `${siteConfig.siteTitle} - Starter Kit` }]

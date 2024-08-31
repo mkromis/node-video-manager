@@ -13,7 +13,6 @@ import { z } from 'zod'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { Loader2 } from 'lucide-react'
-import { requireSessionUser } from '#app/modules/auth/auth.server'
 import {
   createCustomer,
   createFreeSubscription,
@@ -27,6 +26,7 @@ import { ROUTE_PATH as LOGIN_PATH } from '#app/routes/auth+/login'
 import { Input } from '#app/components/ui/input'
 import { Button } from '#app/components/ui/button'
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
+import { requireSessionUser } from '#app/services/session.server.js'
 
 export const ROUTE_PATH = '/onboarding/username' as const
 

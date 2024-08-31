@@ -6,8 +6,6 @@ import { z } from 'zod'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { Upload } from 'lucide-react'
-import { requireUser } from '#app/modules/auth/auth.server'
-import { getSession, destroySession } from '#app/modules/auth/auth-session.server'
 import { prisma } from '#app/utils/db.server'
 import { createToastHeaders } from '#app/utils/toast.server'
 import { useDoubleCheck } from '#app/utils/hooks/use-double-check'
@@ -23,6 +21,7 @@ import {
   ImageSchema,
 } from '#app/routes/resources+/upload-image'
 import { ROUTE_PATH as RESET_IMAGE_PATH } from '#app/routes/resources+/reset-image'
+import { destroySession, getSession, requireUser } from '#app/services/session.server.js'
 
 export const UsernameSchema = z.object({
   username: z

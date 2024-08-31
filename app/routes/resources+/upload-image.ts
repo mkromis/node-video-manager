@@ -8,9 +8,9 @@ import {
 import { z } from 'zod'
 import { parseWithZod } from '@conform-to/zod'
 import { type SubmissionResult } from '@conform-to/react'
-import { requireUser } from '#app/modules/auth/auth.server'
 import { prisma } from '#app/utils/db.server.js'
 import { createToastHeaders } from '#app/utils/toast.server'
+import { requireUser } from '#app/services/session.server.js'
 
 export const ROUTE_PATH = '/resources/upload-image' as const
 export const MAX_FILE_SIZE = 1024 * 1024 * 3 // 3MB

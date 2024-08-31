@@ -1,5 +1,5 @@
+import { authenticator } from '#app/services/auth.server.js'
 import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node'
-import { authenticator } from '#app/modules/auth/auth.server'
 
 export const ROUTE_PATH = '/auth/logout' as const
 
