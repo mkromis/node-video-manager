@@ -1,13 +1,9 @@
 import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node'
 import { json } from '@remix-run/node'
-import { Plus, ExternalLink } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
 import { BigPlayButton, Player } from "video-react";
 import { requireUser } from '#app/modules/auth/auth.server'
 import { prisma } from '#app/utils/db.server'
-import { cn } from '#app/utils/misc.js'
 import { siteConfig } from '#app/utils/constants/brand'
-import { buttonVariants } from '#app/components/ui/button'
 
 export const meta: MetaFunction = () => {
   return [{ title: `${siteConfig.siteTitle} - Dashboard` }]
@@ -22,7 +18,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function DashboardIndex() {
-  const { t } = useTranslation()
+  // const { t } = useTranslation()
 
   return (
     <div className="flex h-full w-full bg-secondary px-6 py-8 dark:bg-black">
@@ -41,39 +37,13 @@ export default function DashboardIndex() {
           </div>
           <div className="relative mx-auto flex w-full  flex-col items-center p-6">
             <div className="relative flex w-full flex-col items-center justify-center gap-6 overflow-hidden rounded-lg border border-border bg-secondary px-6 py-24 dark:bg-card">
-              <div className="z-10 flex max-w-[460px] flex-col items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/20 bg-card hover:border-primary/40">
-                  <Plus className="h-8 w-8 stroke-[1.5px] text-primary/60" />
-                </div>
-                <div className="flex flex-col items-center gap-2">
-                  <p className="text-base font-medium text-primary">{t('title')}</p>
-                  <p className="text-center text-base font-normal text-primary/60">
-                    {t('description')}
-                  </p>
-                  <Player playsInline src="/media/test.mp4" >
-				            <BigPlayButton position="center" />
-			            </Player>
-                  <span className="hidden select-none items-center rounded-full bg-green-500/5 px-3 py-1 text-xs font-medium tracking-tight text-green-700 ring-1 ring-inset ring-green-600/20 backdrop-blur-md dark:bg-green-900/40 dark:text-green-100 md:flex">
-                    TIP: Try changing the language!
-                  </span>
-                </div>
-              </div>
-              <div className="z-10 flex items-center justify-center">
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://github.com/dev-xo/remix-saas/tree/main/docs#welcome-to-%EF%B8%8F-remix-saas-documentation"
-                  className={cn(
-                    `${buttonVariants({ variant: 'ghost', size: 'sm' })} gap-2`,
-                  )}>
-                  <span className="text-sm font-medium text-primary/60 group-hover:text-primary">
-                    Explore Documentation
-                  </span>
-                  <ExternalLink className="h-4 w-4 stroke-[1.5px] text-primary/60 group-hover:text-primary" />
-                </a>
-              </div>
-              <div className="base-grid absolute h-full w-full opacity-40" />
-              <div className="absolute bottom-0 h-full w-full bg-gradient-to-t from-[hsl(var(--card))] to-transparent" />
+                {/* This gives a grid background */}
+                <div className="base-grid absolute h-full w-full opacity-40" /> 
+                {/* This give an overlay of fading the grid */}
+                <div className="absolute bottom-0 h-full w-full bg-gradient-to-t from-[hsl(var(--card))] to-transparent" />
+                <Player playsInline src="/media/test.mp4">
+                  <BigPlayButton position="center" />
+                </Player>
             </div>
           </div>
         </div>

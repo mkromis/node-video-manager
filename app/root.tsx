@@ -28,7 +28,9 @@ import { ClientHintCheck } from '#app/components/misc/client-hints'
 import { GenericErrorBoundary } from '#app/components/misc/error-boundary'
 import i18nServer, { localeCookie } from '#app/modules/i18n/i18n.server'
 
-import RootCSS from './root.css?url'
+// CSS files
+import rootCss from './root.css?url'
+import videoCss from "node_modules/video-react/dist/video-react.css?url"
 
 export const handle = { i18n: ['translation'] }
 
@@ -43,7 +45,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 }
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: RootCSS }]
+  return [
+    { rel: 'stylesheet', href: rootCss },
+    { rel: 'stylesheet', href: videoCss }
+  ]
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
