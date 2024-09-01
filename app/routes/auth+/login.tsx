@@ -21,7 +21,6 @@ import { siteConfig } from '#app/utils/constants/brand'
 import { Input } from '#app/components/ui/input'
 import { Button } from '#app/components/ui/button'
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
-import { ROUTE_PATH as AUTH_VERIFY_PATH } from '#app/routes/auth+/verify'
 import { authenticator } from '#app/services/auth.server.js'
 
 export const ROUTE_PATH = '/auth/login' as const
@@ -42,8 +41,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const cookie = await getSession(request.headers.get('Cookie'))
   const authEmail = cookie.get('auth:email')
   const authError = cookie.get(authenticator.sessionErrorKey)
+  const authPasswd = ''
 
-  return json({ authEmail, authError } as const, {
+  return json({ authEmail, authPasswd, authError } as const, {
     headers: {
       'Set-Cookie': await commitSession(cookie),
     },
@@ -59,19 +59,26 @@ export async function action({ request }: ActionFunctionArgs) {
   await validateCSRF(formData, clonedRequest.headers)
   checkHoneypot(formData)
 
-  await authenticator.authenticate('totp', request, {
-    successRedirect: AUTH_VERIFY_PATH,
+  await authenticator.authenticate('form', request, {
+    successRedirect: DASHBOARD_PATH,
     failureRedirect: pathname,
   })
+
+  // Not really needed for nas use. If using on a web site,
+  // use an email verification.
+  // await authenticator.authenticate('totp', request, {
+  //   successRedirect: AUTH_VERIFY_PATH,
+  //   failureRedirect: pathname,
+  // })
 }
 
 export default function Login() {
-  const { authEmail, authError } = useLoaderData<typeof loader>()
+  const { authEmail, authPasswd, authError } = useLoaderData<typeof loader>()
   const inputRef = useRef<HTMLInputElement>(null)
   const isHydrated = useHydrated()
   const isPending = useIsPending()
 
-  const [emailForm, { email }] = useForm({
+  const [emailForm, { email, passwd }] = useForm({
     constraint: getZodConstraint(LoginSchema),
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: LoginSchema })
@@ -86,7 +93,7 @@ export default function Login() {
     <div className="mx-auto flex h-full w-full max-w-96 flex-col items-center justify-center gap-6">
       <div className="mb-2 flex flex-col gap-2">
         <h3 className="text-center text-2xl font-medium text-primary">
-          Continue to Remix SaaS
+          Continue to Video Manager
         </h3>
         <p className="text-center text-base font-normal text-primary/60">
           Welcome back! Please log in to continue.
@@ -128,6 +135,19 @@ export default function Login() {
               {authError.message}
             </span>
           )}
+        </div>
+        <div className="flex w-full flex-col gap-1.5">
+          <label htmlFor='passwd' className='sr-only'>
+            Password
+          </label>
+          <Input
+            placeholder='Password'  
+            defaultValue={authPasswd ? authPasswd : ''}
+            className={`bg-transparent ${
+              passwd.errors && 'border-destructive focus-visible:ring-destructive'
+            }`}
+            {...getInputProps(passwd, {type:'password'})}
+            />
         </div>
 
         <Button type="submit" className="w-full">
