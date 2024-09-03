@@ -56,16 +56,18 @@ WORKDIR /remixapp
 # Copy files needed for deploy
 COPY docker-entrypoint.js package.json pnpm-lock.yaml postcss.config.mjs tailwind.config.ts tsconfig.json vite.config.ts ./
 
-# Copy packages
-COPY --from=prod /remixapp/node_modules /node_modules
+# Copy packages 
+COPY --from=build /remixapp/node_modules /remixapp/node_modules
 
 # Copy built application
-COPY --from=build /remixapp/build /build
-COPY --from=build /remixapp/app /app
-COPY --from=build /remixapp/node_modules/prisma /node_modules/prisma
+COPY --from=build /remixapp/build /remixapp/build
+COPY --from=build /remixapp/app /remixapp/app
+#COPY --from=build /remixapp/node_modules/prisma /remixapp/node_modules/prisma
+#COPY --from=build /remixapp/node_modules/.pnpm/@prisma* /remixapp/node_modules/.pnpm
+
 
 # Entrypoint prepares the database.
-ENTRYPOINT [ "/app/docker-entrypoint.js" ]
+ENTRYPOINT [ "/remixapp/docker-entrypoint.js" ]
 
 ENV DATABASE_URL="file:///data/sqlite.db"
 ENV NODE_ENV production

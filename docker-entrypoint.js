@@ -7,12 +7,12 @@ const env = { ...process.env }
 ;(async () => {
   // If running the web server then migrate existing database.
   if (process.argv.slice(2).join(' ') === 'npm run start') {
-    await exec('npx prisma migrate deploy')
+    await exec('pnpm run db:migrate:deploy')
   }
 
   // Run the seed script before starting the web server.
   // Comment me out after the first deployment ❗.
-  await exec('npx prisma db seed')
+  // await exec('pnpm run db:seed')
 
   // Launch application.
   await exec(process.argv.slice(2).join(' '))
