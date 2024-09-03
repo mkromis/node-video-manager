@@ -1,64 +1,80 @@
-# syntax = docker/dockerfile:1
+# base node image
+FROM node:20-slim as base
 
-# Adjust NODE_VERSION as desired
-ARG NODE_VERSION=20.11.0
-FROM node:${NODE_VERSION}-slim as base
+# set for base and all layer that inherit from it
 
-LABEL fly_launch_runtime="Remix/Prisma"
+# setup pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-# Remix/Prisma app lives here
-WORKDIR /app
+COPY . /remixapp
 
-# Set production environment
-ENV NODE_ENV="production"
-
-# Throw-away build stage to reduce size of final image
+# Install all node_modules, including dev
 FROM base as build
 
 # Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential node-gyp openssl pkg-config python-is-python3
+RUN apt-get update -qq
+RUN apt-get install --no-install-recommends -y build-essential node-gyp openssl pkg-config python-is-python3
 
-# Install node modules
-COPY --link .npmrc package-lock.json package.json ./
-RUN npm ci --include=dev
+WORKDIR /remixapp
 
-# Generate Prisma Client
-COPY --link prisma .
-RUN npx prisma generate
-
-# Copy application code
-COPY --link . .
+COPY package.json pnpm-lock.yaml /
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 # Build application
-RUN npm run build
+RUN pnpm run build
 
-# Remove development dependencies
-RUN npm prune --omit=dev
+# Generate Prisma Client
+RUN pnpm run db:gen
+COPY prisma ./prisma
 
-# Final stage for app image
-FROM base
+# Setup production node_modules
+FROM base as prod
+
+WORKDIR /remixapp
+
+# using from deps you need to specify full path
+# COPY --from=deps /remixapp/node_modules /node_modules
+COPY package.json pnpm-lock.yaml /
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+
+# Build the app
+FROM base as deploy
 
 # Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y openssl sqlite3 && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Copy built application
-COPY --from=build /app /app
-COPY --from=build /app/node_modules/prisma /app/node_modules/prisma
-
-# Setup sqlite3 on a separate volume
-RUN mkdir -p /data
-VOLUME /data
+RUN apt-get update -qq
+RUN apt-get install --no-install-recommends -y openssl sqlite3
+RUN rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # add shortcut for connecting to database CLI
 RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-cli && chmod +x /usr/local/bin/database-cli
 
+RUN mkdir /data
+WORKDIR /remixapp
+
+# Copy files needed for deploy
+COPY docker-entrypoint.js package.json pnpm-lock.yaml postcss.config.mjs tailwind.config.ts tsconfig.json vite.config.ts ./
+
+# Copy packages
+COPY --from=prod /remixapp/node_modules /node_modules
+
+# Copy built application
+COPY --from=build /remixapp/build /build
+COPY --from=build /remixapp/app /app
+COPY --from=build /remixapp/node_modules/prisma /node_modules/prisma
+
 # Entrypoint prepares the database.
 ENTRYPOINT [ "/app/docker-entrypoint.js" ]
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
 ENV DATABASE_URL="file:///data/sqlite.db"
-CMD [ "npm", "run", "start" ]
+ENV NODE_ENV production
+ENV SESSION_SECRET ThisIsAS4cr3tKey
+ENV DB_PATH /data
+ENV MEDIA /media
+ENV PORT 8080
+ENV RESEND_API_KEY 1
+ENV STRIPE_PUBLIC_KEY 1
+ENV STRIPE_SECRET_KEY 1
+
+CMD ["pnpm", "run", "start"]
