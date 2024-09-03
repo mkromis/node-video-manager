@@ -6,7 +6,9 @@ import { FormStrategy } from "remix-auth-form";
 
 export const formStrategy = new FormStrategy<User>(
   async ({ form, context }) => {
-    const email = form.get("email");
+    const email = form.get("email")?.toString();
+    if (email == null)
+      throw new Error(ERRORS.AUTH_SOMETHING_WENT_WRONG);
 
     let user = await prisma.user.findUnique({
       where: { email: email },
