@@ -1,124 +1,39 @@
-import {
-	ExitIcon,
-	HomeIcon,
-	LaptopIcon,
-	LockClosedIcon,
-	MoonIcon,
-	SunIcon,
-} from "@radix-ui/react-icons";
-import { Form, Link, redirect } from "@remix-run/react";
-import * as React from "react";
-import { useHydrated } from "remix-utils/use-hydrated";
+import { useLocation } from '@remix-run/react'
+import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
+import { ROUTE_PATH as BILLING_PATH } from '#app/routes/dashboard+/settings.billing'
+import { ROUTE_PATH as SETTINGS_PATH } from '#app/routes/dashboard+/settings'
+import { ROUTE_PATH as ADMIN_PATH } from '#app/routes/admin+/_layout'
 
-import {
-	getTheme,
-	setTheme as setSystemTheme,
-} from "@/components/theme-switcher";
-import { Button } from "@/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+export function Header() {
+  const location = useLocation()
+  const allowedLocations = [DASHBOARD_PATH, BILLING_PATH, SETTINGS_PATH, ADMIN_PATH]
 
-export function Header({
-	isAuthenticated,
-}: { isAuthenticated: boolean | undefined }) {
-	const hydrated = useHydrated();
-	const [, rerender] = React.useState({});
-	const setTheme = React.useCallback((theme: string) => {
-		setSystemTheme(theme);
-		rerender({});
-	}, []);
-	const theme = getTheme();
+  const headerTitle = () => {
+    if (location.pathname === DASHBOARD_PATH) return 'Dashboard'
+    if (location.pathname === BILLING_PATH) return 'Billing'
+    if (location.pathname === SETTINGS_PATH) return 'Settings'
+    if (location.pathname === ADMIN_PATH) return 'Admin'
+  }
+  const headerDescription = () => {
+    if (location.pathname === DASHBOARD_PATH)
+      return 'Manage your Apps and view your usage.'
+    if (location.pathname === SETTINGS_PATH) return 'Manage your account settings.'
+    if (location.pathname === BILLING_PATH)
+      return 'Manage billing and your subscription plan.'
+    if (location.pathname === ADMIN_PATH) return 'Your admin dashboard.'
+  }
 
-	return (
-		<>
-			<Form id="logout-form" method="POST" action="/logout" />
-			<header className="flex items-center justify-between px-4 py-2 md:py-4">
-				<div className="flex items-center space-x-4">
-					<Link className="flex items-center space-x-2" to="/">
-						{/* <HomeIcon className="h-6 w-6" /> */}
-						<span className="text-lg font-bold">Nas Video</span>
-					</Link>
-				</div>
-				<div className="flex items-center space-x-4">
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button
-								className="w-10 h-10 rounded-full border"
-								size="icon"
-								variant="ghost"
-								title="Theme selector"
-							>
-								<span className="sr-only">Theme selector</span>
-								{!hydrated ? null : theme === "dark" ? (
-									<MoonIcon />
-								) : theme === "light" ? (
-									<SunIcon />
-								) : (
-									<LaptopIcon />
-								)}
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent className="mt-2">
-							<DropdownMenuLabel>Theme</DropdownMenuLabel>
-							<DropdownMenuSeparator />
-							<DropdownMenuItem asChild>
-								<button
-									type="button"
-									className="w-full"
-									onClick={() => setTheme("light")}
-									aria-selected={theme === "light"}
-								>
-									Light
-								</button>
-							</DropdownMenuItem>
-							<DropdownMenuItem asChild>
-								<button
-									type="button"
-									className="w-full"
-									onClick={() => setTheme("dark")}
-									aria-selected={theme === "dark"}
-								>
-									Dark
-								</button>
-							</DropdownMenuItem>
-							<DropdownMenuItem asChild>
-								<button
-									type="button"
-									className="w-full"
-									onClick={() => setTheme("system")}
-									aria-selected={theme === "system"}
-								>
-									System
-								</button>
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
-					{!isAuthenticated && (
-						<Link to="/login">
-							<LockClosedIcon />
-						</Link>
-					)}
-					{isAuthenticated && (
-						<Button
-							form="logout-form"
-							type="submit"
-							className="w-10 h-10 rounded-full border"
-							size="icon"
-							variant="ghost"
-							title="Logout"
-						>
-							<span className="sr-only">Logout</span>
-							<ExitIcon />
-						</Button>
-					)}
-				</div>
-			</header>
-		</>
-	);
+  if (!allowedLocations.includes(location.pathname as (typeof allowedLocations)[number]))
+    return null
+
+  return (
+    <header className="z-10 flex w-full flex-col border-b border-border bg-card px-6">
+      <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between py-12">
+        <div className="flex flex-col items-start gap-2">
+          <h1 className="text-3xl font-medium text-primary/80">{headerTitle()}</h1>
+          <p className="text-base font-normal text-primary/60">{headerDescription()}</p>
+        </div>
+      </div>
+    </header>
+  )
 }

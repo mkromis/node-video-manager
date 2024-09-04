@@ -1,48 +1,22 @@
-import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig } from "vite";
-import envOnly from "vite-env-only";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { vitePlugin as remix } from '@remix-run/dev'
+import { defineConfig } from 'vite'
+import { flatRoutes } from 'remix-flat-routes'
+import { remixDevTools } from 'remix-development-tools'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
-export default defineConfig(({ isSsrBuild }) => ({
-	ssr: {
-		resolve: {
-			externalConditions: ["node"],
-		},
-	},
-	optimizeDeps: {
-		exclude: ["bcryptjs", "better-sqlite3", "drizzle-orm", "fsevents"],
-	},
-	plugins: [
-		// TODO: Fix EnvOnly()
-		//envOnly(),
-		tsconfigPaths(),
-		remix({
-			future: {
-				v3_fetcherPersist: true,
-				v3_relativeSplatPath: true,
-				v3_throwAbortReason: true,
-			},
-		}),
-		{
-			name: "ssr-entries",
-			config(userConfig, { isSsrBuild }) {
-				if (isSsrBuild) {
-					const userInput = userConfig.build?.rollupOptions?.input;
-					if (typeof userInput !== "string")
-						throw new Error("Invalid base input");
-
-					return {
-						...userConfig,
-						build: {
-							...userConfig.build,
-							rollupOptions: {
-								...userConfig.build?.rollupOptions,
-								input: [userInput, "./app/db.server/schema.ts"],
-							},
-						},
-					};
-				}
-			},
-		},
-	],
-}));
+export default defineConfig({
+  build: {
+    target: 'ES2022',
+  },
+  plugins: [
+    remixDevTools(),
+    remix({
+      serverModuleFormat: 'esm',
+      ignoredRouteFiles: ['**/.*'],
+      routes: async (defineRoutes) => {
+        return flatRoutes('routes', defineRoutes)
+      },
+    }),
+    tsconfigPaths(),
+  ],
+})

@@ -7,59 +7,76 @@ FROM node:20-slim as base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
+
 COPY . /remixapp
-WORKDIR /remixapp
 
 # Install all node_modules, including dev
-FROM base as deps
+FROM base as build
+
+# Install packages needed to build node modules
+RUN apt-get update -qq
+RUN apt-get install --no-install-recommends -y build-essential node-gyp openssl pkg-config python-is-python3
 
 WORKDIR /remixapp
 
-ADD package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml /
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
+# Build application
+RUN pnpm run build
+
+# Generate Prisma Client
+RUN pnpm run db:gen
+COPY prisma ./prisma
+
 # Setup production node_modules
-FROM base as production-deps
+FROM base as prod
 
 WORKDIR /remixapp
 
-COPY --from=deps /remixapp/node_modules /remixapp/node_modules
-ADD package.json pnpm-lock.yaml ./
+# using from deps you need to specify full path
+# COPY --from=deps /remixapp/node_modules /node_modules
+COPY package.json pnpm-lock.yaml /
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
 # Build the app
-FROM base as build
+FROM base as deploy
 
-WORKDIR /remixapp
+# Install packages needed for deployment
+RUN apt-get update -qq
+RUN apt-get install --no-install-recommends -y openssl sqlite3
+RUN rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-#RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-COPY --from=deps /remixapp/node_modules /remixapp/node_modules
-ADD package.json pnpm-lock.yaml postcss.config.js tailwind.config.cjs tsconfig.json vite.config.ts ./
-ADD app/ app/
-ADD public/ public/
+# add shortcut for connecting to database CLI
+RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-cli && chmod +x /usr/local/bin/database-cli
 
-RUN pnpm run build
-
-# Finally, build the production image with minimal footprint
-FROM base
-
-# You may need to run volumes from command instead from UI
 RUN mkdir /data
 WORKDIR /remixapp
 
+# Copy files needed for deploy
+COPY docker-entrypoint.js package.json pnpm-lock.yaml postcss.config.mjs tailwind.config.ts tsconfig.json vite.config.ts ./
+
+# Copy packages 
+COPY --from=build /remixapp/node_modules /remixapp/node_modules
+
+# Copy built application
+COPY --from=build /remixapp/build /remixapp/build
+COPY --from=build /remixapp/app /remixapp/app
+#COPY --from=build /remixapp/node_modules/prisma /remixapp/node_modules/prisma
+#COPY --from=build /remixapp/node_modules/.pnpm/@prisma* /remixapp/node_modules/.pnpm
+
+
+# Entrypoint prepares the database.
+ENTRYPOINT [ "/remixapp/docker-entrypoint.js" ]
+
+ENV DATABASE_URL="file:///data/sqlite.db"
 ENV NODE_ENV production
 ENV SESSION_SECRET ThisIsAS4cr3tKey
 ENV DB_PATH /data
 ENV MEDIA /media
 ENV PORT 8080
-
-COPY --from=production-deps /remixapp/node_modules /remixapp/node_modules
-COPY --from=build /remixapp/build /remixapp/build
-COPY --from=build /remixapp/package.json /remixapp/package.json
-
-ADD server.js ./
-ADD migrations/ migrations/
-
-#RUN mkdir /remixapp/data
+ENV RESEND_API_KEY 1
+ENV STRIPE_PUBLIC_KEY 1
+ENV STRIPE_SECRET_KEY 1
 
 CMD ["pnpm", "run", "start"]

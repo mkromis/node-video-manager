@@ -1,11 +1,24 @@
-.cache
-.database
+# Package Managers
+yarn.lock
+node_modules
+
+# Editor Configs
+.idea
+.vscode
 .DS_Store
-.env
-.env.example
+
+# Miscelaneous
 .git
 .github
-.vscode
-*.log
+.cache
 build
-node_modules
+public/build
+media
+.env
+
+# Prisma
+prisma/data.db
+prisma/data.db-journal
+
+# Tests
+coverage
