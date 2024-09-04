@@ -6,11 +6,25 @@ import compression from 'compression'
 import morgan from 'morgan'
 import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
+import * as fs from "node:fs"
+import * as path from "node:path"
+
+const SESSION_SECRET = process.env.SESSION_SECRET
+if (!SESSION_SECRET) {
+  throw new Error('The SESSION_SECRET environment variable is required')
+}
+if (!process.env.DB_PATH) {
+  throw new Error('The DB_PATH environment variable is required')
+}
+if (!process.env.MEDIA) {
+  throw new Error('The MEDIA  environment variable is required')
+}
 
 installGlobals()
 
 const PORT = process.env.PORT || 3000
 const NODE_ENV = process.env.NODE_ENV ?? 'development'
+const isProd = process.env.NODE_ENV === 'production'
 
 const viteDevServer =
   process.env.NODE_ENV === 'production'
@@ -21,16 +35,24 @@ const viteDevServer =
         }),
       )
 
+// Setup the media folder
+const mediaDir = path.resolve(process.env.MEDIA);
+fs.mkdirSync(mediaDir, { recursive: true });
+
+// Setup and migrate the database
+const dbDir = path.resolve(process.env.DB_PATH);
+fs.mkdirSync(dbDir, { recursive: true });
+
 const app = express()
 
-/**
- * Good practices: Disable x-powered-by.
- * @see http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
- */
-app.disable('x-powered-by')
+  /**
+   * Good practices: Disable x-powered-by.
+   * @see http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
+   */
+  app.disable('x-powered-by')
 
-app.use(compression())
-app.use(morgan('tiny'))
+  app.use(compression())
+  app.use(morgan('tiny'))
 
 /**
  * Content Security Policy.
