@@ -27,7 +27,7 @@
     "validate": "npm run lint && npm run typecheck"
   },
   "dependencies": {
-    "@conform-to/react": "1.1.4",
+    "@conform-to/react": "1.1.5",
     "@conform-to/zod": "1.1.5",
     "@epic-web/client-hints": "^1.3.2",
     "@prisma/client": "5.19.1",
