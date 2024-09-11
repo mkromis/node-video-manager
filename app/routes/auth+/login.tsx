@@ -27,6 +27,7 @@ export const ROUTE_PATH = '/auth/login' as const
 
 export const LoginSchema = z.object({
   email: z.string().max(256).email('Email address is not valid.'),
+  passwd: z.string().max(256).default('Password is not valid'),
 })
 
 export const meta: MetaFunction = () => {
