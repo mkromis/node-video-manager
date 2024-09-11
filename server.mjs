@@ -35,24 +35,26 @@ const viteDevServer =
         }),
       )
 
+// Start engine
+const app = express()
+
 // Setup the media folder
 const mediaDir = path.resolve(process.env.MEDIA);
 fs.mkdirSync(mediaDir, { recursive: true });
+app.use('/media', express.static(mediaDir));
 
 // Setup and migrate the database
 const dbDir = path.resolve(process.env.DB_PATH);
 fs.mkdirSync(dbDir, { recursive: true });
 
-const app = express()
+/**
+ * Good practices: Disable x-powered-by.
+ * @see http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
+ */
+app.disable('x-powered-by')
 
-  /**
-   * Good practices: Disable x-powered-by.
-   * @see http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
-   */
-  app.disable('x-powered-by')
-
-  app.use(compression())
-  app.use(morgan('tiny'))
+app.use(compression())
+app.use(morgan('tiny'))
 
 /**
  * Content Security Policy.

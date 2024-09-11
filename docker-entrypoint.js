@@ -4,9 +4,10 @@ import { spawn } from 'node:child_process'
 
 const env = { ...process.env }
 
-;(async () => {
+(async () => {
   // If running the web server then migrate existing database.
   if (process.argv.slice(2).join(' ') === 'npm run start') {
+    console.log('Running migration')
     await exec('pnpm run db:migrate:deploy')
   }
 

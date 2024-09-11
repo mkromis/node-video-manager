@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { prisma } from '#app/utils/db.server'
 import { stripe } from '#app/modules/stripe/stripe.server'
 import { PRICING_PLANS } from '#app/modules/stripe/plans'
+import * as argon2 from 'argon2'
 
 const client = new PrismaClient()
 
@@ -48,6 +49,7 @@ async function seed() {
     data: {
       email: 'admin@admin.com',
       username: 'admin',
+      passhash: await argon2.hash('admin'),
       roles: { connect: [{ name: 'admin' }, { name: 'user' }] },
     },
   })
