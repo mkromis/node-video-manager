@@ -1,5 +1,5 @@
 import type { AppLoadContext, EntryContext } from '@remix-run/node'
-import isbot from 'isbot'
+import { isbot } from 'isbot'
 import { PassThrough } from 'node:stream'
 import { RemixServer } from '@remix-run/react'
 import { createReadableStreamFromReadable } from '@remix-run/node'
