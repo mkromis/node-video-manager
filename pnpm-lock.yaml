@@ -12,8 +12,8 @@ importers:
         specifier: 1.1.5
         version: 1.1.5(react@18.3.1)
       '@conform-to/zod':
-        specifier: 1.1.5
-        version: 1.1.5(zod@3.23.8)
+        specifier: 1.2.2
+        version: 1.2.2(zod@3.23.8)
       '@epic-web/client-hints':
         specifier: ^1.3.4
         version: 1.3.4
@@ -112,16 +112,16 @@ importers:
         version: 1.5.0(@remix-run/server-runtime@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2)))
       remix-auth-github:
         specifier: ^2.0.0
-        version: 2.0.0(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2)))
+        version: 2.0.0(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2)))
       remix-auth-totp:
         specifier: ^3.4.2
         version: 3.4.2(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2)))
       remix-i18next:
         specifier: ^6.4.1
-        version: 6.4.1(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(i18next@23.15.1)(react-i18next@15.0.2(i18next@23.15.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 6.4.1(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(i18next@23.15.1)(react-i18next@15.0.2(i18next@23.15.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       remix-utils:
         specifier: 7.6.0
-        version: 7.6.0(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/router@1.19.2)(crypto-js@4.2.0)(intl-parse-accept-language@1.0.0)(react@18.3.1)(zod@3.23.8)
+        version: 7.6.0(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/router@1.19.2)(crypto-js@4.2.0)(intl-parse-accept-language@1.0.0)(react@18.3.1)(zod@3.23.8)
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -434,19 +434,19 @@ packages:
   '@cloudflare/kv-asset-handler@0.1.3':
     resolution: {integrity: sha512-FNcunDuTmEfQTLRLtA6zz+buIXUHj1soPvSWzzQFBC+n2lsy+CGf/NIrR3SEPCmsVNQj70/Jx2lViCpq+09YpQ==}
 
-  '@cloudflare/workers-types@4.20240909.0':
-    resolution: {integrity: sha512-4knwtX6efxIsIxawdmPyynU9+S8A78wntU8eUIEldStWP4gNgxGkeWcfCMXulTx8oxr3DU4aevHyld9HGV8VKQ==}
-
   '@conform-to/dom@1.1.5':
     resolution: {integrity: sha512-tWI3YxWvDaZFSl4QN8Y0WbgBxsWEfcTrSMtKic3YTt/hGVJXjQ8qURBdsJXudzJ38zwAr5GhpLWmyI6BbG9+gA==}
+
+  '@conform-to/dom@1.2.2':
+    resolution: {integrity: sha512-f05EClpNP31o6lX4LYmmLqgsiTOHdGfY7z2XXK6U6rRp+EtxrkUBdrFlIGsfkf7e9AFO19h3/Cb/cXHVd1k1FA==}
 
   '@conform-to/react@1.1.5':
     resolution: {integrity: sha512-QyzJ8SIazHmez7qkMffypICDBwU+Ht5TPe+C4MTP2dro0N0Hu6LsfLq7mMWFJyAJ7IYxT1BMzfoFj28jheIIOw==}
     peerDependencies:
       react: '>=18'
 
-  '@conform-to/zod@1.1.5':
-    resolution: {integrity: sha512-ho/742wgfTWf2u5tKo4GT88xcKcvTOCDPOi4o1WEmePPmJNP5ezeMQSKSdKdS0rFinZl9ZTH8gV5FQUNPHAA7A==}
+  '@conform-to/zod@1.2.2':
+    resolution: {integrity: sha512-mNCzh0XsF2vhCtD8bfHYMYayEJ9dP6/KsGjmq8DFcO1ykDTNQZwfi1MIm4evGYVempSS3poYr4xZjd7cXEbtaw==}
     peerDependencies:
       zod: ^3.21.0
 
@@ -6334,19 +6334,18 @@ snapshots:
       mime: 2.6.0
     optional: true
 
-  '@cloudflare/workers-types@4.20240909.0':
-    optional: true
-
   '@conform-to/dom@1.1.5': {}
+
+  '@conform-to/dom@1.2.2': {}
 
   '@conform-to/react@1.1.5(react@18.3.1)':
     dependencies:
       '@conform-to/dom': 1.1.5
       react: 18.3.1
 
-  '@conform-to/zod@1.1.5(zod@3.23.8)':
+  '@conform-to/zod@1.2.2(zod@3.23.8)':
     dependencies:
-      '@conform-to/dom': 1.1.5
+      '@conform-to/dom': 1.2.2
       zod: 3.23.8
 
   '@emotion/babel-plugin@11.12.0':
@@ -7620,10 +7619,9 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2)':
+  '@remix-run/cloudflare@2.12.0(typescript@5.6.2)':
     dependencies:
       '@cloudflare/kv-asset-handler': 0.1.3
-      '@cloudflare/workers-types': 4.20240909.0
       '@remix-run/server-runtime': 2.12.0(typescript@5.6.2)
     optionalDependencies:
       typescript: 5.6.2
@@ -8138,7 +8136,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.25.7(@babel/core@7.25.7)
       '@vanilla-extract/babel-plugin-debug-ids': 1.1.0
       '@vanilla-extract/css': 1.16.0(babel-plugin-macros@3.1.0)
-      esbuild: 0.17.6
+      esbuild: 0.19.11
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -11337,18 +11335,18 @@ snapshots:
       '@remix-run/server-runtime': 2.12.1(typescript@5.6.2)
       remix-auth: 3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2))
 
-  remix-auth-github@2.0.0(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2))):
+  remix-auth-github@2.0.0(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2))):
     dependencies:
       remix-auth: 3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2))
-      remix-auth-oauth2: 2.4.0(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2)))
+      remix-auth-oauth2: 2.4.0(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2)))
     optionalDependencies:
-      '@remix-run/cloudflare': 2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2)
+      '@remix-run/cloudflare': 2.12.0(typescript@5.6.2)
       '@remix-run/deno': 2.12.0(typescript@5.6.2)
       '@remix-run/node': 2.12.1(typescript@5.6.2)
     transitivePeerDependencies:
       - supports-color
 
-  remix-auth-oauth2@2.4.0(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2))):
+  remix-auth-oauth2@2.4.0(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(remix-auth@3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2))):
     dependencies:
       '@oslojs/crypto': 0.6.2
       '@oslojs/encoding': 1.1.0
@@ -11356,7 +11354,7 @@ snapshots:
       debug: 4.3.7
       remix-auth: 3.7.0(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/server-runtime@2.12.1(typescript@5.6.2))
     optionalDependencies:
-      '@remix-run/cloudflare': 2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2)
+      '@remix-run/cloudflare': 2.12.0(typescript@5.6.2)
       '@remix-run/deno': 2.12.0(typescript@5.6.2)
       '@remix-run/node': 2.12.1(typescript@5.6.2)
     transitivePeerDependencies:
@@ -11405,22 +11403,22 @@ snapshots:
       fs-extra: 11.2.0
       minimatch: 5.1.6
 
-  remix-i18next@6.4.1(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(i18next@23.15.1)(react-i18next@15.0.2(i18next@23.15.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  remix-i18next@6.4.1(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(i18next@23.15.1)(react-i18next@15.0.2(i18next@23.15.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       '@remix-run/react': 2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2)
       i18next: 23.15.1
       react: 18.3.1
       react-i18next: 15.0.2(i18next@23.15.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     optionalDependencies:
-      '@remix-run/cloudflare': 2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2)
+      '@remix-run/cloudflare': 2.12.0(typescript@5.6.2)
       '@remix-run/deno': 2.12.0(typescript@5.6.2)
       '@remix-run/node': 2.12.1(typescript@5.6.2)
 
-  remix-utils@7.6.0(@remix-run/cloudflare@2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/router@1.19.2)(crypto-js@4.2.0)(intl-parse-accept-language@1.0.0)(react@18.3.1)(zod@3.23.8):
+  remix-utils@7.6.0(@remix-run/cloudflare@2.12.0(typescript@5.6.2))(@remix-run/deno@2.12.0(typescript@5.6.2))(@remix-run/node@2.12.1(typescript@5.6.2))(@remix-run/react@2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2))(@remix-run/router@1.19.2)(crypto-js@4.2.0)(intl-parse-accept-language@1.0.0)(react@18.3.1)(zod@3.23.8):
     dependencies:
       type-fest: 4.26.1
     optionalDependencies:
-      '@remix-run/cloudflare': 2.12.0(@cloudflare/workers-types@4.20240909.0)(typescript@5.6.2)
+      '@remix-run/cloudflare': 2.12.0(typescript@5.6.2)
       '@remix-run/deno': 2.12.0(typescript@5.6.2)
       '@remix-run/node': 2.12.1(typescript@5.6.2)
       '@remix-run/react': 2.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.2)
