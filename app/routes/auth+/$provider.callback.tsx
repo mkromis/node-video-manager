@@ -5,7 +5,7 @@ import { authenticator } from '#app/services/auth.server.js'
 
 export const ROUTE_PATH = '/auth/:provider/callback' as const
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
+export const loader = async ({ request, params}: LoaderFunctionArgs) => {
   if (typeof params.provider !== 'string') throw new Error('Invalid provider.')
 
   return authenticator.authenticate(params.provider, request, {
