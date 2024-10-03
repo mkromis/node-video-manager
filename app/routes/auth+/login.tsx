@@ -1,7 +1,7 @@
 import type {
+  ActionFunctionArgs,
   MetaFunction,
   LoaderFunctionArgs,
-  ActionFunctionArgs,
 } from '@remix-run/node'
 import { useRef, useEffect } from 'react'
 import { Form, useLoaderData } from '@remix-run/react'
@@ -34,7 +34,7 @@ export const meta: MetaFunction = () => {
   return [{ title: `${siteConfig.siteTitle} - Login` }]
 }
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticator.isAuthenticated(request, {
     successRedirect: DASHBOARD_PATH,
   })
@@ -51,7 +51,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   })
 }
 
-export async function action({ request }: ActionFunctionArgs) {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const url = new URL(request.url)
   const pathname = url.pathname
 

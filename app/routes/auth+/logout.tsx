@@ -3,10 +3,10 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from '@remix-run/node'
 
 export const ROUTE_PATH = '/auth/logout' as const
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   return authenticator.logout(request, { redirectTo: '/' })
 }
 
-export async function action({ request }: ActionFunctionArgs) {
+export const action = async ({ request }: ActionFunctionArgs) => {
   return authenticator.logout(request, { redirectTo: '/' })
 }
