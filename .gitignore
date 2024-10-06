@@ -10,6 +10,7 @@ node_modules
 # Miscelaneous
 /.cache
 /build
+/dist
 /public/build
 .env
 
