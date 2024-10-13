@@ -8,14 +8,24 @@ export default defineConfig({
   build: {
     target: 'ES2022',
   },
+  server: {
+    port: 3000
+  },
   plugins: [
     remixDevTools(),
     remix({
       serverModuleFormat: 'esm',
-      ignoredRouteFiles: ['**/.*'],
+      ignoredRouteFiles: ['**/.*'], // Ignore dot files
       routes: async (defineRoutes) => {
         return flatRoutes('routes', defineRoutes)
       },
+      future: {
+        v3_fetcherPersist: true,
+        v3_relativeSplatPath: true,
+        v3_throwAbortReason: true,
+        v3_singleFetch: true,
+        v3_lazyRouteDiscovery: true,
+      }
     }),
     tsconfigPaths(),
   ],
