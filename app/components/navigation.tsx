@@ -7,8 +7,8 @@ import { userHasRole, getUserImgSrc, cn } from '#app/utils/misc'
 import { ROUTE_PATH as LOGOUT_PATH } from '#app/routes/auth+/logout'
 import { ROUTE_PATH as ADMIN_PATH } from '#app/routes/admin+/_layout'
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
-import { ROUTE_PATH as DASHBOARD_SETTINGS_PATH } from '#app/routes/dashboard+/settings'
-import { ROUTE_PATH as DASHBOARD_SETTINGS_BILLING_PATH } from '#app/routes/dashboard+/settings.billing'
+import { ROUTE_PATH as DASHBOARD_SETTINGS_PATH } from '#app/routes/settings+/_layout'
+import { ROUTE_PATH as DASHBOARD_SETTINGS_BILLING_PATH } from '#app/routes/settings+/billing'
 import { ThemeSwitcher } from '#app/components/misc/theme-switcher'
 import { LanguageSwitcher } from '#app/components/misc/language-switcher'
 import {
@@ -245,7 +245,7 @@ export function Navigation({ user, planId }: NavigationProps) {
           </Link>
         </div>
         <div
-          className={`flex h-12 items-center border-b-2 ${isSettingsPath ? 'border-primary' : 'border-transparent'}`}>
+          className={`flex h-12 items-center border-b-2 ${isSettingsPath || isBillingPath ? 'border-primary' : 'border-transparent'}`}>
           <Link
             to={DASHBOARD_SETTINGS_PATH}
             prefetch="intent"
@@ -255,7 +255,7 @@ export function Navigation({ user, planId }: NavigationProps) {
             Settings
           </Link>
         </div>
-        <div
+        {/* <div
           className={`flex h-12 items-center border-b-2 ${isBillingPath ? 'border-primary' : 'border-transparent'}`}>
           <Link
             to={DASHBOARD_SETTINGS_BILLING_PATH}
@@ -265,7 +265,7 @@ export function Navigation({ user, planId }: NavigationProps) {
             )}>
             Billing
           </Link>
-        </div>
+        </div> */}
       </div>
     </nav>
   )

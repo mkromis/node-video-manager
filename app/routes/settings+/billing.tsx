@@ -20,7 +20,7 @@ import { Switch } from '#app/components/ui/switch'
 import { Button } from '#app/components/ui/button'
 import { requireSessionUser } from '#app/services/session.server.js'
 
-export const ROUTE_PATH = '/dashboard/settings/billing' as const
+export const ROUTE_PATH = '/settings/billing' as const
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Remix SaaS - Billing' }]

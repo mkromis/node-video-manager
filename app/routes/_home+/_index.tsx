@@ -473,17 +473,17 @@ export default function Index() {
           <p className="flex items-center whitespace-nowrap text-center text-sm font-medium text-primary/60">
             Built by&nbsp;
             <a
-              href="https://twitter.com/DanielKanem"
+              href="https://github.com/mkromis"
               target="_blank"
               rel="noreferrer"
               className="flex items-center text-primary hover:text-primary hover:underline">
-              DanielKanem
+              Mark Kromis
             </a>
           </p>
           <p className="flex items-center whitespace-nowrap text-center text-sm font-medium text-primary/60">
             Source code available on&nbsp;{' '}
             <a
-              href="https://github.com/dev-xo/remix-saas"
+              href="https://github.com/mkromis/node-video-manager"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center text-primary hover:text-primary hover:underline">

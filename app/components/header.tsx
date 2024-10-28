@@ -1,7 +1,7 @@
 import { useLocation } from '@remix-run/react'
 import { ROUTE_PATH as DASHBOARD_PATH } from '#app/routes/dashboard+/_layout'
-import { ROUTE_PATH as BILLING_PATH } from '#app/routes/dashboard+/settings.billing'
-import { ROUTE_PATH as SETTINGS_PATH } from '#app/routes/dashboard+/settings'
+import { ROUTE_PATH as BILLING_PATH } from '#app/routes/settings+/billing'
+import { ROUTE_PATH as SETTINGS_PATH } from '#app/routes/settings+/_layout'
 import { ROUTE_PATH as ADMIN_PATH } from '#app/routes/admin+/_layout'
 
 export function Header() {

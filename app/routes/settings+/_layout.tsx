@@ -1,13 +1,15 @@
 import type { MetaFunction, LoaderFunctionArgs } from '@remix-run/node'
-import { Link, Outlet, useLocation } from '@remix-run/react'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import { json } from '@remix-run/node'
 import { z } from 'zod'
 import { cn } from '#app/utils/misc'
-import { ROUTE_PATH as BILLING_PATH } from '#app/routes/dashboard+/settings.billing'
+import { ROUTE_PATH as BILLING_PATH } from '#app/routes/settings+/billing'
 import { buttonVariants } from '#app/components/ui/button'
 import { requireUser } from '#app/services/session.server.js'
+import { Header } from '#app/components/header.tsx'
+import { Navigation } from '#app/components/navigation.tsx'
 
-export const ROUTE_PATH = '/dashboard/settings' as const
+export const ROUTE_PATH = '/settings' as const
 
 export const UsernameSchema = z.object({
   username: z
@@ -29,11 +31,16 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function DashboardSettings() {
+  const {user} = useLoaderData<typeof loader>()
   const location = useLocation()
   const isSettingsPath = location.pathname === ROUTE_PATH
   const isBillingPath = location.pathname === BILLING_PATH
 
   return (
+    <div>
+      <Navigation user={user} />
+      <Header />
+
     <div className="flex h-full w-full px-6 py-8">
       <div className="mx-auto flex h-full w-full max-w-screen-xl gap-12">
         <div className="hidden w-full max-w-64 flex-col gap-0.5 lg:flex">
@@ -67,6 +74,7 @@ export default function DashboardSettings() {
 
         <Outlet />
       </div>
+    </div>
     </div>
   )
 }

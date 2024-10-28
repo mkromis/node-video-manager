@@ -6,4 +6,4 @@ import Stripe from 'stripe'
 //   throw new Error(`Stripe - ${ERRORS.ENVS_NOT_INITIALIZED})`)
 // }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+export const stripe = null; //new Stripe(process.env.STRIPE_SECRET_KEY)
